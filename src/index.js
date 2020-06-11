@@ -461,7 +461,7 @@ class TrackTable extends React.Component {
 
           <Table selectable>
             <Table.Header>
-              <Table.Row>
+              <Table.Row >
                 {/* <Table.HeaderCell /> */}
                 <Table.HeaderCell>Cover</Table.HeaderCell>
                 <Table.HeaderCell>Title</Table.HeaderCell>
@@ -538,12 +538,12 @@ class TrackRow extends React.Component {
             
             {
               this.props.spotify_visible
-              ? <Grid columns={3}>
-                  <Grid.Column>
+              ? <Grid doubling columns={3}>
+                  <Grid.Column >
                     <h5>Biography</h5>
                     <LastFmBiography lastfm_query={track.artists[0].name}/>
                   </Grid.Column>
-                  <Grid.Column>
+                  <Grid.Column /* style={{width: "20%"}}  */>
                     <h5>Artist popularity</h5>
                     <TagsAndPopularity uri={track.artists[0].uri} token={this.props.token}/>
                   </Grid.Column>
@@ -552,13 +552,13 @@ class TrackRow extends React.Component {
                     <AudioAnalysis uri={track.uri} token={this.props.token}/>
                   </Grid.Column>
                 </Grid>
-              : <div></div>
+              : ""
             }
 
             { 
               this.props.youtube_visible && this.props.spotify_visible
               ? <Divider />
-              : <div></div>
+              : ""
             }
 
             {
@@ -569,7 +569,7 @@ class TrackRow extends React.Component {
                     <YoutubeAnalysis youtube_query={track.name+" - "+track.artists[0].name} />
                   </Grid.Column>
                 </Grid>
-              : <div></div>
+              : ""
             }
 
           </center>
@@ -886,7 +886,7 @@ class YoutubeAnalysis extends React.Component {
     var max_results = 10 // Comments and likes
     //console.log("video_id::::", this.state.videoId)
 
-    const apiCallComments = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&key='+this.state.token+'&videoId='+videoId+'&maxResults='+max_results
+    const apiCallComments = 'https://www.googleapis.com/youtube/v3/commentThreads?order=relevance&part=snippet&key='+this.state.token+'&videoId='+videoId+'&maxResults='+max_results
     //const apiCallLikes = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&key=AIzaSyBDXfiGLFI3ZdCTBq-GgAKHOhJ8Wv6-Sck&id='+this.state.videoId
     
     fetch(apiCallComments)
@@ -950,7 +950,7 @@ class YoutubeAnalysis extends React.Component {
       <div> 
         <Segment basic>
           <center>
-            <Grid columns={2}>
+            <Grid doubling columns={2}>
               <Grid.Column>
                 <h5>Comments</h5>
                  <div class="scrollable" tabIndex="0">
